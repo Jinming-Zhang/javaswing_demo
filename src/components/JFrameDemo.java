@@ -15,6 +15,8 @@ public class JFrameDemo {
     updateFrameIcon(frame, "/arts/icons/icon.jpg");
 
     configureContentPane(frame);
+    // resize size of the frame to fit the content
+    frame.pack();
     frame.setVisible(true);// show the gui
   }
 

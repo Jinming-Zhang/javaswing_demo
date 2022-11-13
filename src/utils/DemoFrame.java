@@ -11,7 +11,7 @@ public class DemoFrame extends JFrame {
   public DemoFrame() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(new Dimension(1366, 768));
-    setResizable(false);
+    // setResizable(false);
     ImageIcon icon = new ImageIcon(getClass().getResource("/arts/icons/icon.jpg"));
     setIconImage(icon.getImage());
     getContentPane().setBackground(Color.cyan);
