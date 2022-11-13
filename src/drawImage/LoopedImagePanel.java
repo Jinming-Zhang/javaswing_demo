@@ -51,7 +51,7 @@ public class LoopedImagePanel extends JPanel implements ActionListener {
     if (index >= loops.length) {
       index = 0;
       for (int i = 0; i < loops.length; i++) {
-        loops[i] = ImageTransformer.flipY(loops[i]);
+        loops[i] = ImageTransformer.flipX(loops[i]);
       }
     }
     repaint();
