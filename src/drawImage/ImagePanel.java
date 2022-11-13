@@ -2,12 +2,10 @@ package drawImage;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel {
@@ -19,7 +17,7 @@ public class ImagePanel extends JPanel {
     try {
       img = ImageIO.read(getClass().getResourceAsStream(src));
       finalWidth = (int) (200.0 / img.getHeight() * img.getWidth());
-      finalHeight = (int) (200.0 / img.getHeight() * img.getWidth());
+      finalHeight = (int) (200.0 / img.getHeight() * img.getHeight());
       setPreferredSize(new Dimension(finalWidth, finalHeight));
     } catch (Exception e) {
       // TODO: handle exception
