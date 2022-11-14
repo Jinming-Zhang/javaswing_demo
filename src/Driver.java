@@ -23,8 +23,8 @@ public class Driver {
     // JMenuDemo.RunDemo();
     // DrawShapeDemo.RunDemo();
     // DrawImageDemo.RunDemo();
-    KeyeventDemo.RunDemo();
-    // GridBagLayoutDemo.RunDemo();
+    // KeyeventDemo.RunDemo();
+    GridBagLayoutDemo.RunDemo();
 
   }
 }
