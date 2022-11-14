@@ -3,7 +3,7 @@ import components.JFrameDemo;
 import components.JLabelDemo;
 import components.JMenuDemo;
 import components.JPanelDemo;
-import drawImage.DrawImage;
+import drawImage.DrawImageDemo;
 import layout.BorderLayoutDemo;
 import layout.FlowLayoutDemo;
 import layout.GridBagLayoutDemo;
@@ -18,8 +18,8 @@ public class Driver {
     // BorderLayoutDemo.RunDemo();
     // FlowLayoutDemo.RunDemo();
 
-    JMenuDemo.RunDemo();
-    // DrawImage.RunDemo();
+    // JMenuDemo.RunDemo();
+    // DrawImageDemo.RunDemo();
     // GridBagLayoutDemo.RunDemo();
 
   }
