@@ -3,6 +3,7 @@ package demo;
 import drawImage.LoopedImagePanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -50,7 +51,7 @@ public class ReedDemo {
   private Position current = new Position(0, 0);
   private DungeonSpace[][] dungeonArray;
   private boolean wrap = true;
-  private String playerName = "Wolffurry\n";
+  private String playerName = "Jimmy\n";
   
   // player
   private Player player;
@@ -137,10 +138,34 @@ public class ReedDemo {
           b.add(new LoopedImagePanel(5, 3, "/arts/characters/player-idle-1.png", "/arts/characters/player-idle-2.png",
               "/arts/characters/player-idle-3.png", "/arts/characters/player-idle-4.png"));
         } else {
-          ImageIcon icon = new ImageIcon(
-              new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
+          int index = (i + j) % 7;
+          java.net.URL imageURL = null;
+          switch (index) {
+            case 0:
+              imageURL = ReedDemo.class.getResource("/arts/pyro.png");
+              break;
+            case 1:
+              imageURL = ReedDemo.class.getResource("/arts/hydro.png");
+              break;
+            case 2:
+              imageURL = ReedDemo.class.getResource("/arts/anemo.png");
+              break;
+            case 3:
+              imageURL = ReedDemo.class.getResource("/arts/electro.png");
+              break;
+            case 4:
+              imageURL = ReedDemo.class.getResource("/arts/dendro.png");
+              break;
+            case 5:
+              imageURL = ReedDemo.class.getResource("/arts/cryo.png");
+              break;
+            case 6:
+              imageURL = ReedDemo.class.getResource("/arts/geo.png");
+              break;
+          }
+          ImageIcon icon = new ImageIcon(imageURL);
           b.setIcon(icon);
-          b.setBackground(Color.BLACK);
+          b.setBackground(Color.DARK_GRAY);
         }
         // save current postion.
         b.putClientProperty(this.current, new Position(i, j));
@@ -150,7 +175,7 @@ public class ReedDemo {
           @Override
           public void actionPerformed(ActionEvent e) {
             JButton b = (JButton)e.getSource();
-            if (b.getBackground().equals(Color.green)) {
+            if (b.getBackground().equals(Color.pink)) {
               current = (Position) b.getClientProperty(current);
               player.moveTo(current);
               updateGui();
@@ -163,6 +188,8 @@ public class ReedDemo {
       }
     }
     // color every valid adjacent dungeon space.
+    java.net.URL imageURL = ReedDemo.class.getResource("/arts/primogem.png");
+    ImageIcon icon = new ImageIcon(imageURL);
     DungeonSpace current = this.dungeonArray[this.current.getRow()][this.current.getCol()];
     if (current
         .getPathDirection()
@@ -171,7 +198,8 @@ public class ReedDemo {
       if (newRow == -1) {
         newRow = this.ROW - 1;
       }
-      this.dungeonButtons[newRow][this.current.getCol()].setBackground(Color.green);
+      this.dungeonButtons[newRow][this.current.getCol()].setIcon(icon);
+      this.dungeonButtons[newRow][this.current.getCol()].setBackground(Color.pink);
     }
     if (current
         .getPathDirection()
@@ -180,7 +208,8 @@ public class ReedDemo {
       if (newCol == this.COL) {
         newCol = 0;
       }
-      this.dungeonButtons[this.current.getRow()][newCol].setBackground(Color.green);
+      this.dungeonButtons[this.current.getRow()][newCol].setIcon(icon);
+      this.dungeonButtons[this.current.getRow()][newCol].setBackground(Color.pink);
     }
     if (current
         .getPathDirection()
@@ -189,7 +218,8 @@ public class ReedDemo {
       if (newRow == this.ROW) {
         newRow = 0;
       }
-      this.dungeonButtons[newRow][this.current.getCol()].setBackground(Color.green);
+      this.dungeonButtons[newRow][this.current.getCol()].setIcon(icon);
+      this.dungeonButtons[newRow][this.current.getCol()].setBackground(Color.pink);
     }
     if (current
         .getPathDirection()
@@ -198,7 +228,8 @@ public class ReedDemo {
       if (newCol == -1) {
         newCol = this.COL - 1;
       }
-      this.dungeonButtons[this.current.getRow()][newCol].setBackground(Color.green);
+      this.dungeonButtons[this.current.getRow()][newCol].setIcon(icon);
+      this.dungeonButtons[this.current.getRow()][newCol].setBackground(Color.pink);
     }
     // add buttons to dungeon panel.
     for (int i = 0; i < this.ROW; i++) {
@@ -218,37 +249,42 @@ public class ReedDemo {
     
     // adding other components to the gui
     // intialize boxlayout for infoDisplay panel.
-    BoxLayout box = new BoxLayout(this.infoDisplay, BoxLayout.Y_AXIS);
-    this.infoDisplay.setLayout(box);
+    JPanel playerInfoPane = new JPanel();
+    BoxLayout box = new BoxLayout(playerInfoPane, BoxLayout.Y_AXIS);
+    playerInfoPane.setLayout(box);
+    playerInfoPane.setSize(new Dimension(300, 600));
+    this.infoDisplay.setLayout(new BorderLayout());
     
     // add basic player information
-    this.infoDisplay.add(new JLabel(String.format("Player: %s\n", this.playerName)));
-    this.infoDisplay.add(new JLabel("\n"));
-    this.infoDisplay.add(new JLabel(
-        String.format("Position: %s\n", this.current.toString())));
-    this.infoDisplay.add(new JLabel("Treasures: \n"));
-    this.infoDisplay.add(new JLabel("\n"));
+    playerInfoPane.add(new JLabel(String.format("Player: %s\n", this.playerName)),
+        BorderLayout.CENTER);
+    playerInfoPane.add(new JLabel("\n"), BorderLayout.NORTH);
+    playerInfoPane.add(new JLabel(
+        String.format("Position: %s\n", this.current.toString())),
+        BorderLayout.CENTER);
+    playerInfoPane.add(new JLabel("\n"), BorderLayout.NORTH);
+    playerInfoPane.add(new JLabel("Treasures: \n"), BorderLayout.NORTH);
     // Diamond count
     int diamondCount = 0;
     if (this.player.getTreasure().get(Treasure.DIAMOND) != null) {
       diamondCount = this.player.getTreasure().get(Treasure.DIAMOND);
     }
-    this.infoDisplay.add(new JLabel(
-        String.format("Diamond --- %d", diamondCount)));
+    playerInfoPane.add(new JLabel(
+        String.format("Diamond --- %d", diamondCount)), BorderLayout.NORTH);
     // Sapphire count
     int sapphireCount = 0;
     if (this.player.getTreasure().get(Treasure.SAPPHIRE) != null) {
       sapphireCount = this.player.getTreasure().get(Treasure.SAPPHIRE);
     }
-    this.infoDisplay.add(new JLabel(
-        String.format("Sapphire --- %d", sapphireCount)));
+    playerInfoPane.add(new JLabel(
+        String.format("Sapphire --- %d", sapphireCount)), BorderLayout.NORTH);
     // Ruby count
     int rubyCount = 0;
     if (this.player.getTreasure().get(Treasure.RUBY) != null) {
       rubyCount = this.player.getTreasure().get(Treasure.RUBY);
     }
-    this.infoDisplay.add(new JLabel(
-        String.format("Ruby    ---    %d", rubyCount)));
+    playerInfoPane.add(new JLabel(
+        String.format("Ruby    ---    %d", rubyCount)), BorderLayout.NORTH);
     
     JTextPane message = new JTextPane();
     if (currentSpace.hasTreasure()) {
@@ -259,19 +295,8 @@ public class ReedDemo {
       this.dungeonArray[this.current.getRow()][this.current.getCol()].removeTreasures();
       message.setText(treasureInfo);
     }
-    this.infoDisplay.add(message);
-    
-//    this.infoDisplay.add(new JLabel("Treasure at current location:\n"));
-//    String treasureInfo = "";
-//    DungeonSpace currentSpace = this.dungeonArray[this.current.getRow()][this.current.getCol()];
-//    if (currentSpace.getTreasure() != null && !currentSpace.getTreasure().isEmpty()) {
-//      for (Treasure t : currentSpace.getTreasure()) {
-//        treasureInfo = String.format("%s%s\n", treasureInfo, t.toString());
-//      }
-//    } else {
-//      treasureInfo = String.format("%sNone\n", treasureInfo);
-//    }
-//    this.infoDisplay.add(new JLabel(treasureInfo));
+    this.infoDisplay.add(message, BorderLayout.PAGE_END);
+    this.infoDisplay.add(playerInfoPane, BorderLayout.PAGE_START);
     this.gui.add(infoDisplay, BorderLayout.LINE_START);
   }
   
@@ -281,7 +306,7 @@ public class ReedDemo {
   
   public static void main(String[] args) {
     ReedDemo demo = new ReedDemo();
-    JFrame f = new JFrame("Project 4 Demo");
+    JFrame f = new JFrame("Dungeon Impact");
     // set frame icon
     java.net.URL imageURL = ReedDemo.class.getResource("/arts/hoyoverseIcon.jpeg");
     ImageIcon frameIcon = new ImageIcon(imageURL);
