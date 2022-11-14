@@ -1,5 +1,6 @@
 package demo;
 
+import drawImage.LoopedImagePanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -24,39 +25,54 @@ import javax.swing.border.LineBorder;
  */
 
 public class ReedDemo {
-  
-  private final int ROW = 6;
+  // define rows and columns
+  private final int ROW = 8;
   private final int COL = 8;
   
+  // define Panel and buttons
   private JPanel gui = new JPanel(new BorderLayout(3, 3));
   private JButton[][] dungeonSpace = new JButton[ROW][COL];
   private JPanel dungeon;
   private DungeonSpace[][] dungeonArray;
   private Position current = new Position(0, 0);
+  private boolean wrap = true;
   
+  /**
+   * default public constructor.
+   */
   ReedDemo() {
     this.initializeDungeon();
     this.runGui();
   }
   
-  // generate a random map using MapGenerator.
+  /**
+   *  generate a random map using MapGenerator.
+   */
   private void initializeDungeon() {
-    MapGenerator map = new MapGenerator(this.ROW, this.COL, false, 0, 0);
+    MapGenerator map = new MapGenerator(this.ROW, this.COL, wrap, 0, 0);
     this.dungeonArray = map.generateMazeSpace();
   }
   
+  /**
+   * run and generate GUI.
+   */
   public final void runGui() {
     drawMaze();
   }
 
+  /**
+   * Update GUI as needed.
+   */
   public void updateGui() {
-    System.out.println("!");
     this.gui.removeAll();
     this.drawMaze();
     this.gui.revalidate();
     this.gui.repaint();
   }
   
+  /**
+   * Draw everything
+   */
   private void drawMaze() {
     gui.setBorder(new EmptyBorder(5, 5, 5, 5));
     this.dungeon = new JPanel(new GridLayout(this.ROW, this.COL));
@@ -67,52 +83,76 @@ public class ReedDemo {
     Insets spaceMargin = new Insets(0, 0, 0, 0);
     for (int i = 0; i < this.dungeonSpace.length; i++) {
       for (int j = 0; j < this.dungeonSpace[i].length; j++) {
+        // create buttons
         JButton b = new JButton();
         b.setMargin(spaceMargin);
-        ImageIcon icon = new ImageIcon(
-            new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
-        b.setIcon(icon);
-        b.setBackground(Color.WHITE);
+        if (this.current.equals(new Position(i, j))) {
+          b.add(new LoopedImagePanel(5, 3, "/arts/characters/player-idle-1.png", "/arts/characters/player-idle-2.png",
+              "/arts/characters/player-idle-3.png", "/arts/characters/player-idle-4.png"));
+        } else {
+          ImageIcon icon = new ImageIcon(
+              new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
+          b.setIcon(icon);
+          b.setBackground(Color.BLACK);
+        }
+        // save current postion.
+        b.putClientProperty(this.current, new Position(i, j));
+        
+        // add listener.
+        b.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            JButton b = (JButton)e.getSource();
+            if (b.getBackground().equals(Color.green)) {
+              current = (Position) b.getClientProperty(current);
+              updateGui();
+            }
+          }
+        });
+        
+        // add private 2D array variable
         this.dungeonSpace[i][j] = b;
-//        b.addActionListener(new ActionListener() {
-//          @Override
-//          public void actionPerformed(ActionEvent e) {
-//            if (b.getBackground().equals(Color.yellow)) {
-//              b.setBackground(Color.BLUE);
-//              b.revalidate();
-//              b.repaint();
-//            }
-//          }
-//        });
       }
     }
-    
     // change color as needed:
-    this.dungeonSpace[this.current.getRow()][this.current.getCol()].setBackground(Color.blue);
+//    this.dungeonSpace[this.current.getRow()][this.current.getCol()].setBackground(Color.blue);
     DungeonSpace current = this.dungeonArray[this.current.getRow()][this.current.getCol()];
     if (current
         .getPathDirection()
         .contains(Direction.NORTH)) {
-      this.dungeonSpace[this.current.getRow() - 1][this.current.getCol()].setBackground(Color.yellow);
+      int newRow = this.current.getRow() - 1;
+      if (newRow == -1) {
+        newRow = this.ROW - 1;
+      }
+      this.dungeonSpace[newRow][this.current.getCol()].setBackground(Color.green);
     }
     if (current
         .getPathDirection()
         .contains(Direction.EAST)) {
-      this.dungeonSpace[this.current.getRow()][this.current.getCol() + 1].setBackground(Color.yellow);
+      int newCol = this.current.getCol() + 1;
+      if (newCol == this.COL) {
+        newCol = 0;
+      }
+      this.dungeonSpace[this.current.getRow()][newCol].setBackground(Color.green);
     }
     if (current
         .getPathDirection()
         .contains(Direction.SOUTH)) {
-      this.dungeonSpace[this.current.getRow() + 1][this.current.getCol()].setBackground(Color.yellow);
+      int newRow = this.current.getRow() + 1;
+      if (newRow == this.ROW) {
+        newRow = 0;
+      }
+      this.dungeonSpace[newRow][this.current.getCol()].setBackground(Color.green);
     }
     if (current
         .getPathDirection()
         .contains(Direction.WEST)) {
-      this.dungeonSpace[this.current.getRow()][this.current.getCol() - 1].setBackground(Color.yellow);
+      int newCol = this.current.getCol() - 1;
+      if (newCol == -1) {
+        newCol = this.COL - 1;
+      }
+      this.dungeonSpace[this.current.getRow()][newCol].setBackground(Color.green);
     }
-    
-    
-    
     // add space
     for (int i = 0; i < this.ROW; i++) {
       for (int j = 0; j < this.COL; j++) {
@@ -129,7 +169,6 @@ public class ReedDemo {
     ReedDemo demo = new ReedDemo();
     JFrame f = new JFrame("Test");
     f.add(demo.getGui());
-    f.setSize(600, 600);
     f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     f.setLocationByPlatform(true);
     f.pack();
