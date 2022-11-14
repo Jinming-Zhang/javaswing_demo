@@ -16,12 +16,12 @@ public class JFrameDemo {
 
     configureContentPane(frame);
     // resize size of the frame to fit the content
-    frame.pack();
+    // frame.pack();
     frame.setVisible(true);// show the gui
   }
 
   public static void configureFrameSize(JFrame frame) {
-    frame.setSize(new Dimension(1366, 768));
+    frame.setSize(new Dimension(500, 500));
     frame.setResizable(false);
   }
 

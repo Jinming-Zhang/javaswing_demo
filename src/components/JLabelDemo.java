@@ -21,7 +21,7 @@ public class JLabelDemo {
   public static void RunDemo() {
     JFrame frame = new DemoFrame();
 
-    JLabel label = new JLabel("yoooo");
+    JLabel label = new JLabel("Yoooooooooo broooooo");
 
     setLabelImage(label, "/arts/icons/doggy.gif");
 
