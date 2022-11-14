@@ -53,7 +53,7 @@ public class ReedDemo {
   private String playerName = "Wolffurry\n";
   
   // player
-  private Player player;
+  // private Player player;
   
   /**
    * default public constructor.
@@ -71,7 +71,7 @@ public class ReedDemo {
         this.COL, this.wrap, this.interconnectivity, this.seed);
     this.dungeonArray = map.generateMazeSpace();
     this.generateTreasure();
-    this.player = new DungeonPlayer(this.playerName, this.current);
+    // this.player = new DungeonPlayer(this.playerName, this.current);
   }
   
   /**
@@ -152,7 +152,7 @@ public class ReedDemo {
             JButton b = (JButton)e.getSource();
             if (b.getBackground().equals(Color.green)) {
               current = (Position) b.getClientProperty(current);
-              player.moveTo(current);
+              // player.moveTo(current);
               updateGui();
             }
           }
@@ -212,7 +212,7 @@ public class ReedDemo {
         this.dungeonArray[this.current.getRow()][this.current.getCol()];
     if (currentSpace.hasTreasure()) {
       for (Treasure t : currentSpace.getTreasure()) {
-        this.player.pickUpTreasure(t);
+        // this.player.pickUpTreasure(t);
       }
     }
     
@@ -230,23 +230,23 @@ public class ReedDemo {
     this.infoDisplay.add(new JLabel("\n"));
     // Diamond count
     int diamondCount = 0;
-    if (this.player.getTreasure().get(Treasure.DIAMOND) != null) {
-      diamondCount = this.player.getTreasure().get(Treasure.DIAMOND);
-    }
+    // if (this.player.getTreasure().get(Treasure.DIAMOND) != null) {
+    //   diamondCount = this.player.getTreasure().get(Treasure.DIAMOND);
+    // }
     this.infoDisplay.add(new JLabel(
         String.format("Diamond --- %d", diamondCount)));
     // Sapphire count
     int sapphireCount = 0;
-    if (this.player.getTreasure().get(Treasure.SAPPHIRE) != null) {
-      sapphireCount = this.player.getTreasure().get(Treasure.SAPPHIRE);
-    }
+    // if (this.player.getTreasure().get(Treasure.SAPPHIRE) != null) {
+    //   sapphireCount = this.player.getTreasure().get(Treasure.SAPPHIRE);
+    // }
     this.infoDisplay.add(new JLabel(
         String.format("Sapphire --- %d", sapphireCount)));
     // Ruby count
     int rubyCount = 0;
-    if (this.player.getTreasure().get(Treasure.RUBY) != null) {
-      rubyCount = this.player.getTreasure().get(Treasure.RUBY);
-    }
+    // if (this.player.getTreasure().get(Treasure.RUBY) != null) {
+    //   rubyCount = this.player.getTreasure().get(Treasure.RUBY);
+    // }
     this.infoDisplay.add(new JLabel(
         String.format("Ruby    ---    %d", rubyCount)));
     

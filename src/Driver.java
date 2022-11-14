@@ -4,6 +4,8 @@ import components.JLabelDemo;
 import components.JMenuDemo;
 import components.JPanelDemo;
 import drawImage.DrawImageDemo;
+import drawImage.DrawShapeDemo;
+import keyevent.KeyeventDemo;
 import layout.BorderLayoutDemo;
 import layout.FlowLayoutDemo;
 import layout.GridBagLayoutDemo;
@@ -19,7 +21,9 @@ public class Driver {
     // FlowLayoutDemo.RunDemo();
 
     // JMenuDemo.RunDemo();
+    // DrawShapeDemo.RunDemo();
     // DrawImageDemo.RunDemo();
+    KeyeventDemo.RunDemo();
     // GridBagLayoutDemo.RunDemo();
 
   }
