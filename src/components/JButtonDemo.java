@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import commands.PlaySoundCommand;
 import utils.AudioPlayer;
 import utils.DemoFrame;
 import utils.ImageLoader;
@@ -24,6 +25,11 @@ public class JButtonDemo {
     decorateBtn(btn);
 
     addButtonCallback(btn);
+
+    JButton cbtn = new CommandJB(new PlaySoundCommand("/audio/Teemo.laugh1.wav"));
+    cbtn.setBounds(700, 100, 150, 150);
+    frame.add(cbtn);
+
     frame.getContentPane().add(btn);
     frame.setVisible(true);
   }

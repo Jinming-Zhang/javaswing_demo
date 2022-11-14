@@ -16,7 +16,7 @@ public class Driver {
     // JFrameDemo.RunDemo();
     // JLabelDemo.RunDemo();
     // JPanelDemo.RunDemo();
-    // JButtonDemo.RunDemo();
+    JButtonDemo.RunDemo();
 
     // BorderLayoutDemo.RunDemo();
     // FlowLayoutDemo.RunDemo();
@@ -25,8 +25,8 @@ public class Driver {
     // DrawShapeDemo.RunDemo();
     // DrawImageDemo.RunDemo();
     // KeyeventDemo.RunDemo();
-    GridBagLayoutDemo.RunDemo();
+    // GridBagLayoutDemo.RunDemo();
 
-    animationDemo.RunDemo();
+    // animationDemo.RunDemo();
   }
 }
