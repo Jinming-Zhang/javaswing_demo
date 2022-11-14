@@ -25,7 +25,7 @@ import javax.swing.border.LineBorder;
 
 /**
  * ReedDemo class illustrates a dungeon by drawing with Swing.
- * 
+ *
  * @author Ruidi Huang
  *
  */
@@ -38,10 +38,10 @@ public class ReedDemo {
   private final int interconnectivity = 0;
   private int treasurePercentage = 20;
   private final Random random = new Random(seed);
-  
+
   // other varibles:
   private int treasureCount = 0;
-  
+
   // define Panel and buttons
   private JPanel gui = new JPanel(new BorderLayout(3, 3));
   private JButton[][] dungeonButtons = new JButton[ROW][COL];
@@ -51,10 +51,10 @@ public class ReedDemo {
   private DungeonSpace[][] dungeonArray;
   private boolean wrap = true;
   private String playerName = "Wolffurry\n";
-  
+
   // player
   private Player player;
-  
+
   /**
    * default public constructor.
    */
@@ -62,18 +62,18 @@ public class ReedDemo {
     this.initializeDungeon();
     this.runGui();
   }
-  
+
   /**
    *  generate a random map using MapGenerator.
    */
   private void initializeDungeon() {
-    MapGenerator map = new MapGenerator(this.ROW, 
+    MapGenerator map = new MapGenerator(this.ROW,
         this.COL, this.wrap, this.interconnectivity, this.seed);
     this.dungeonArray = map.generateMazeSpace();
     this.generateTreasure();
     this.player = new DungeonPlayer(this.playerName, this.current);
   }
-  
+
   /**
    * add treasures to the dungeon.
    */
@@ -98,7 +98,7 @@ public class ReedDemo {
       }
     }
   }
-  
+
   /**
    * run and generate GUI.
    */
@@ -116,7 +116,7 @@ public class ReedDemo {
     this.gui.revalidate();
     this.gui.repaint();
   }
-  
+
   /**
    * Draw everything
    */
@@ -125,7 +125,7 @@ public class ReedDemo {
     this.dungeon = new JPanel(new GridLayout(this.ROW, this.COL));
     this.dungeon.setBorder(new LineBorder(Color.BLACK));
     this.gui.add(this.dungeon);
-    
+
     // draw space
     Insets spaceMargin = new Insets(0, 0, 0, 0);
     for (int i = 0; i < this.dungeonButtons.length; i++) {
@@ -144,7 +144,7 @@ public class ReedDemo {
         }
         // save current postion.
         b.putClientProperty(this.current, new Position(i, j));
-        
+
         // add listener.
         b.addActionListener(new ActionListener() {
           @Override
@@ -157,7 +157,7 @@ public class ReedDemo {
             }
           }
         });
-        
+
         // add private 2D array variable
         this.dungeonButtons[i][j] = b;
       }
@@ -206,21 +206,21 @@ public class ReedDemo {
         dungeon.add(dungeonButtons[i][j]);
       }
     }
-    
+
     //add treasure at current location to player.
-    DungeonSpace currentSpace = 
+    DungeonSpace currentSpace =
         this.dungeonArray[this.current.getRow()][this.current.getCol()];
     if (currentSpace.hasTreasure()) {
       for (Treasure t : currentSpace.getTreasure()) {
         this.player.pickUpTreasure(t);
       }
     }
-    
+
     // adding other components to the gui
     // intialize boxlayout for infoDisplay panel.
     BoxLayout box = new BoxLayout(this.infoDisplay, BoxLayout.Y_AXIS);
     this.infoDisplay.setLayout(box);
-    
+
     // add basic player information
     this.infoDisplay.add(new JLabel(String.format("Player: %s\n", this.playerName)));
     this.infoDisplay.add(new JLabel("\n"));
@@ -249,7 +249,7 @@ public class ReedDemo {
     }
     this.infoDisplay.add(new JLabel(
         String.format("Ruby    ---    %d", rubyCount)));
-    
+
     JTextPane message = new JTextPane();
     if (currentSpace.hasTreasure()) {
       String treasureInfo = "Collected";
@@ -260,7 +260,7 @@ public class ReedDemo {
       message.setText(treasureInfo);
     }
     this.infoDisplay.add(message);
-    
+
 //    this.infoDisplay.add(new JLabel("Treasure at current location:\n"));
 //    String treasureInfo = "";
 //    DungeonSpace currentSpace = this.dungeonArray[this.current.getRow()][this.current.getCol()];
@@ -274,11 +274,11 @@ public class ReedDemo {
 //    this.infoDisplay.add(new JLabel(treasureInfo));
     this.gui.add(infoDisplay, BorderLayout.LINE_START);
   }
-  
+
   public final JComponent getGui() {
     return this.gui;
   }
-  
+
   public static void main(String[] args) {
     ReedDemo demo = new ReedDemo();
     JFrame f = new JFrame("Project 4 Demo");
@@ -286,13 +286,13 @@ public class ReedDemo {
     java.net.URL imageURL = ReedDemo.class.getResource("/arts/hoyoverseIcon.jpeg");
     ImageIcon frameIcon = new ImageIcon(imageURL);
     f.setIconImage(frameIcon.getImage());
-    
+
     f.add(demo.getGui());
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     f.setLocationByPlatform(true);
     f.pack();
-    
+
     f.setVisible(true);
   }
-  
+
 }

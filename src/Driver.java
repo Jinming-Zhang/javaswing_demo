@@ -1,3 +1,4 @@
+import animations.animationDemo;
 import components.JButtonDemo;
 import components.JFrameDemo;
 import components.JLabelDemo;
@@ -22,5 +23,6 @@ public class Driver {
     // DrawImageDemo.RunDemo();
     // GridBagLayoutDemo.RunDemo();
 
+    animationDemo.RunDemo();
   }
 }
