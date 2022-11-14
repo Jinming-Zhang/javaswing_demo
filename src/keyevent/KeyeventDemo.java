@@ -1,11 +1,14 @@
 package keyevent;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 import utils.DemoFrame;
 import utils.ImageLoader;
@@ -17,6 +20,8 @@ public class KeyeventDemo {
 
     JLabel lb = new ListenLabel();
     lb.setPreferredSize(new Dimension(150, 150));
+    Border bd = BorderFactory.createLineBorder(Color.cyan, 4);
+    lb.setBorder(bd);
     lb.setIcon(ImageLoader.loadImageIcon("/arts/icons/icon3.png"));
     lb.setFocusable(true);
     frame.add(lb);
