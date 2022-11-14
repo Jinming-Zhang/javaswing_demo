@@ -9,7 +9,7 @@ import layout.GridBagLayoutDemo;
 import java.awt.*;
 import utils.DemoFrame;
 
-public class DrawImage {
+public class DrawImageDemo {
   public static void RunDemo() {
     JFrame frame = new DemoFrame();
     frame.getContentPane().setLayout(new GridBagLayout());
