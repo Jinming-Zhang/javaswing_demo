@@ -14,8 +14,7 @@ import layout.GridBagLayoutDemo;
 
 public class Driver {
   public static void main(String[] args) {
-    ReedDemo.demo();
-    // JFrameDemo.RunDemo();
+    JFrameDemo.RunDemo();
     // JLabelDemo.RunDemo();
     // JPanelDemo.RunDemo();
     // JButtonDemo.RunDemo();
