@@ -8,14 +8,16 @@ import utils.AudioPlayer;
 public class PlaySoundCommand implements ICommand, ActionListener {
 
   String audioPath;
+  public boolean loop;
 
   public PlaySoundCommand(String audioPath) {
     this.audioPath = audioPath;
+    loop = false;
   }
 
   @Override
   public void Execute() {
-    AudioPlayer.playSFX(audioPath);
+    AudioPlayer.playSFX(audioPath, loop);
   }
 
   @Override

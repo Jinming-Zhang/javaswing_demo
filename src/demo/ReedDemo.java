@@ -1,6 +1,8 @@
 package demo;
 
 import drawImage.LoopedImagePanel;
+import utils.ImageLoader;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +25,8 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import commands.PlaySoundCommand;
 
 /**
  * ReedDemo class illustrates a dungeon by drawing with Swing.
@@ -52,7 +56,7 @@ public class ReedDemo {
   private DungeonSpace[][] dungeonArray;
   private boolean wrap = true;
   private String playerName = "Jimmy\n";
-  
+
   // player
   private Player player;
 
@@ -65,7 +69,7 @@ public class ReedDemo {
   }
 
   /**
-   *  generate a random map using MapGenerator.
+   * generate a random map using MapGenerator.
    */
   private void initializeDungeon() {
     MapGenerator map = new MapGenerator(this.ROW,
@@ -174,12 +178,13 @@ public class ReedDemo {
         b.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-            JButton b = (JButton)e.getSource();
+            JButton b = (JButton) e.getSource();
             if (b.getBackground().equals(Color.pink)) {
               current = (Position) b.getClientProperty(current);
               player.moveTo(current);
               updateGui();
             }
+            new PlaySoundCommand("/audio/button_click.wav").Execute();
           }
         });
 
@@ -238,12 +243,12 @@ public class ReedDemo {
       }
     }
 
-    //add treasure at current location to player.
-    DungeonSpace currentSpace =
-        this.dungeonArray[this.current.getRow()][this.current.getCol()];
+    // add treasure at current location to player.
+    DungeonSpace currentSpace = this.dungeonArray[this.current.getRow()][this.current.getCol()];
     if (currentSpace.hasTreasure()) {
       for (Treasure t : currentSpace.getTreasure()) {
         this.player.pickUpTreasure(t);
+        new PlaySoundCommand("/audio/gold.wav").Execute();
       }
     }
 
@@ -254,7 +259,7 @@ public class ReedDemo {
     playerInfoPane.setLayout(box);
     playerInfoPane.setSize(new Dimension(300, 600));
     this.infoDisplay.setLayout(new BorderLayout());
-    
+
     // add basic player information
     playerInfoPane.add(new JLabel(String.format("Player: %s\n", this.playerName)),
         BorderLayout.CENTER);
@@ -303,7 +308,8 @@ public class ReedDemo {
     return this.gui;
   }
 
-  public static void main(String[] args) {
+  // public static void main(String[] args) {
+  public static void demo() {
     ReedDemo demo = new ReedDemo();
     JFrame f = new JFrame("Dungeon Impact");
     // set frame icon
@@ -317,6 +323,16 @@ public class ReedDemo {
     f.pack();
 
     f.setVisible(true);
+    Random r = new Random();
+    PlaySoundCommand bgm = null;
+    if (r.nextInt(2) == 0) {
+      bgm = new PlaySoundCommand("/audio/liyuebattle1.wav");
+    } else {
+      bgm = new PlaySoundCommand("/audio/liyuebattle2.wav");
+    }
+    bgm.loop = true;
+    bgm.Execute();
+
   }
 
 }
