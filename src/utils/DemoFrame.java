@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 
 public class DemoFrame extends JFrame {
 
+  /**
+   * My own configuration of a frame for the purpose of the demo
+   */
   public DemoFrame() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(new Dimension(1366, 768));

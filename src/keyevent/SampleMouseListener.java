@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import commands.EasterneggBtCmd;
 import commands.PlaySoundCommand;
 import utils.ImageLoader;
 import utils.ImageTransformer;
@@ -17,14 +18,21 @@ public class SampleMouseListener implements MouseListener {
   String enteredEmo = "/arts/icons/shocked.png";
   String exitEmo = "/arts/icons/thinking.png";
   String clickEmo = "/arts/icons/teewow.png";
+  EasterneggBtCmd cmd;
+
+  public SampleMouseListener() {
+    cmd = null;
+  }
 
   @Override
   public void mouseClicked(MouseEvent e) {
     if (e.getSource() instanceof JLabel) {
       JLabel l = (JLabel) e.getSource();
       setLabelIcon(l, clickEmo);
-      Random r = new Random();
-      new PlaySoundCommand(hahaha[r.nextInt(hahaha.length)]).Execute();;
+      if (cmd == null) {
+        cmd = new EasterneggBtCmd(hahaha, 10);
+      }
+      cmd.Execute();
     }
   }
 

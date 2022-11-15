@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import commands.EasterneggBtCmd;
 import commands.PlaySoundCommand;
 import utils.AudioPlayer;
 import utils.DemoFrame;
@@ -26,7 +27,8 @@ public class JButtonDemo {
 
     addButtonCallback(btn);
 
-    JButton cbtn = new CommandJB(new PlaySoundCommand("/audio/Teemo.laugh1.wav"));
+    // a simple customized Jbutton with a preset command
+    JButton cbtn = new CommandJBtn(new PlaySoundCommand("/audio/Teemo.laugh1.wav"));
     cbtn.setBounds(700, 100, 150, 150);
     frame.add(cbtn);
 
@@ -50,9 +52,9 @@ public class JButtonDemo {
   }
 
   private static void addButtonCallback(JButton btn) {
-    // teemo_4.wav
+    EasterneggBtCmd bcmd = new EasterneggBtCmd(new String[] { "/audio/teemo_4.wav" }, 10);
     btn.addActionListener(e -> {
-      AudioPlayer.playSFX("/audio/teemo_4.wav");
+      bcmd.Execute();
     });
   }
 }

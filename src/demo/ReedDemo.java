@@ -55,7 +55,7 @@ public class ReedDemo {
   private Position current = new Position(0, 0);
   private DungeonSpace[][] dungeonArray;
   private boolean wrap = true;
-  private String playerName = "Jimmy\n";
+  private String playerName = "ReedGod\n";
 
   // player
   private Player player;
@@ -308,8 +308,8 @@ public class ReedDemo {
     return this.gui;
   }
 
-  // public static void main(String[] args) {
-  public static void demo() {
+  public static void main(String[] args) {
+  // public static void demo() {
     ReedDemo demo = new ReedDemo();
     JFrame f = new JFrame("Dungeon Impact");
     // set frame icon

@@ -31,7 +31,7 @@ public class JLabelDemo {
 
     setTextImageGap(label);
 
-    checkBoarder(label);
+    setBoarder(label);
 
     setLabelContentAlignment(label);
     frame.getContentPane().add(label);
@@ -58,7 +58,7 @@ public class JLabelDemo {
     label.setIconTextGap(10);
   }
 
-  private static void checkBoarder(JLabel label) {
+  private static void setBoarder(JLabel label) {
     Border border = BorderFactory.createLineBorder(Color.blue, 10);
     label.setBorder(border);
   }
