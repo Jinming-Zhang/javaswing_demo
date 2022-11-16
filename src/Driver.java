@@ -20,7 +20,7 @@ public class Driver {
     // JButtonDemo.RunDemo();
 
     // BorderLayoutDemo.RunDemo();
-    FlowLayoutDemo.RunDemo();
+    // FlowLayoutDemo.RunDemo();
 
     // JMenuDemo.RunDemo();
     // DrawShapeDemo.RunDemo();
