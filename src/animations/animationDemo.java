@@ -11,6 +11,7 @@ public class animationDemo {
 
   public static void RunDemo() {
     new MyFrame();
+//    new MyFrame2();
   }
 
 }

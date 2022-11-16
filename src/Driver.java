@@ -25,7 +25,7 @@ public class Driver {
     // DrawShapeDemo.RunDemo();
     // DrawImageDemo.RunDemo();
     // KeyeventDemo.RunDemo();
-    GridBagLayoutDemo.RunDemo();
+    // GridBagLayoutDemo.RunDemo();
 
     animationDemo.RunDemo();
   }
