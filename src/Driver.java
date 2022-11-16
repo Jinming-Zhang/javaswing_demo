@@ -4,6 +4,7 @@ import components.JFrameDemo;
 import components.JLabelDemo;
 import components.JMenuDemo;
 import components.JPanelDemo;
+import demo.ReedDemo;
 import drawImage.DrawImageDemo;
 import drawImage.DrawShapeDemo;
 import keyevent.KeyeventDemo;
@@ -19,7 +20,7 @@ public class Driver {
     // JButtonDemo.RunDemo();
 
     // BorderLayoutDemo.RunDemo();
-    // FlowLayoutDemo.RunDemo();
+    FlowLayoutDemo.RunDemo();
 
     // JMenuDemo.RunDemo();
     // DrawShapeDemo.RunDemo();
@@ -27,6 +28,6 @@ public class Driver {
     // KeyeventDemo.RunDemo();
     // GridBagLayoutDemo.RunDemo();
 
-    animationDemo.RunDemo();
+    // animationDemo.RunDemo();
   }
 }

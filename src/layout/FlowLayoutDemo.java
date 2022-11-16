@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import commands.PlaySoundCommand;
+import components.CommandJBtn;
 import utils.BorderedJPanel;
 import utils.DemoFrame;
 
@@ -27,14 +29,15 @@ public class FlowLayoutDemo {
     panel.setPreferredSize(new Dimension(500, 500));
 
     frame.add(panel);
-    panel.add(new JButton("Button 2"));
-    panel.add(new JButton("Button 3"));
-    panel.add(new JButton("Button 4"));
-    panel.add(new JButton("Button 5"));
-    panel.add(new JButton("Button 6"));
-    panel.add(new JButton("Button 7"));
-    panel.add(new JButton("Button 8"));
-    panel.add(new JButton("Button 9"));
+
+    panel.add(new CommandJBtn("Button 2", new PlaySoundCommand("/audio/Teemo.taunt.wav")));
+    panel.add(new CommandJBtn("Button 3", new PlaySoundCommand("/audio/teemo_4.wav")));
+    panel.add(new CommandJBtn("Button 4", new PlaySoundCommand("/audio/Teemo.attack1.wav")));
+    panel.add(new CommandJBtn("Button 5", new PlaySoundCommand("/audio/Teemo.attack2.wav")));
+    panel.add(new CommandJBtn("Button 6", new PlaySoundCommand("/audio/Teemo.laugh1.wav")));
+    panel.add(new CommandJBtn("Button 7", new PlaySoundCommand("/audio/Teemo.laugh2.wav")));
+    panel.add(new CommandJBtn("Button 8", new PlaySoundCommand("/audio/Teemo.taunt.wav")));
+    panel.add(new CommandJBtn("Button 9", new PlaySoundCommand("/audio/button_click.wav")));
 
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
